@@ -27,10 +27,10 @@ public class ContasPagarModel {
     private double valorOriginal;
 
     @NonNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataVencimento;
 
     @NonNull
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd", locale = "pt-BR", timezone = "Brazil/East")
     private Date dataPagamento;
 }

@@ -2,9 +2,11 @@ package com.deliverit.cpagar.controller;
 
 import com.deliverit.cpagar.facade.ContasPagarFacade;
 import com.deliverit.cpagar.model.ContasPagarModel;
+import com.deliverit.cpagar.model.DadosPagamentoModel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/contas-pagar")
 public class ContasPagarController {
 
@@ -15,8 +17,8 @@ public class ContasPagarController {
     }
 
     @PostMapping("inserir")
-    public void create(@RequestBody ContasPagarModel contasPagarModel) {
-        contasPagarFacade.inserirPagamento(contasPagarModel);
+    public DadosPagamentoModel create(@RequestBody ContasPagarModel contasPagarModel) {
+        return contasPagarFacade.inserirPagamento(contasPagarModel);
     }
 
     @GetMapping("inserir")

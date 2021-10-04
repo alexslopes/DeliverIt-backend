@@ -19,7 +19,7 @@ public class ContasPagarFacade {
         this.dadosPagamentoService = dadosPagamentoService;
     }
 
-    public void inserirPagamento(ContasPagarModel contasPagarModel) {
+    public DadosPagamentoModel inserirPagamento(ContasPagarModel contasPagarModel) {
         int diferencaDias = verificarDiasAtraso(contasPagarModel.getDataVencimento() ,contasPagarModel.getDataPagamento());
         MultaJurosModel multaJurosModel = valorMultaJuros(diferencaDias);
         DadosPagamentoModel dadosPagamentoModel = DadosPagamentoModel.builder()
@@ -32,7 +32,7 @@ public class ContasPagarFacade {
 
         calcularValorCorrigido(dadosPagamentoModel);
 
-        dadosPagamentoService.save(dadosPagamentoModel);
+        return dadosPagamentoService.save(dadosPagamentoModel);
 
     }
 

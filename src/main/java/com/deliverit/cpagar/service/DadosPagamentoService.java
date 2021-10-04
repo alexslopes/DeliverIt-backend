@@ -12,7 +12,7 @@ public class DadosPagamentoService {
     @Autowired
     private DadosPagamentoRepository dadosPagamentoRepository;
 
-    public void save(DadosPagamentoModel dadosPagamentoModel) {
-        this.dadosPagamentoRepository.save(dadosPagamentoModel);
+    public DadosPagamentoModel save(DadosPagamentoModel dadosPagamentoModel) {
+        return this.dadosPagamentoRepository.save(dadosPagamentoModel);
     }
 }
