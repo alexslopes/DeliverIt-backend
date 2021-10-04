@@ -22,6 +22,9 @@ public class DadosPagamentoModel {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     private int id;
 
+    @Column(name = "nome")
+    private String nome;
+
     @Column(name = "valor_original")
     private double valorOriginal;
 

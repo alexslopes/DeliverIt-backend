@@ -24,6 +24,7 @@ public class ContasPagarFacade {
         int diferencaDias = verificarDiasAtraso(contasPagarModel.getDataVencimento() ,contasPagarModel.getDataPagamento());
         MultaJurosModel multaJurosModel = valorMultaJuros(diferencaDias);
         DadosPagamentoModel dadosPagamentoModel = DadosPagamentoModel.builder()
+                .nome(contasPagarModel.getNome())
                 .valorOriginal(contasPagarModel.getValorOriginal())
                 .dataVencimento(contasPagarModel.getDataVencimento())
                 .dataPagamento(contasPagarModel.getDataPagamento())

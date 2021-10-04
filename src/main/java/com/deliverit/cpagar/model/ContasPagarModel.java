@@ -24,6 +24,9 @@ public class ContasPagarModel {
     private int id;
 
     @NonNull
+    private String nome;
+
+    @NonNull
     private double valorOriginal;
 
     @NonNull
