@@ -5,6 +5,8 @@ import com.deliverit.cpagar.model.ContasPagarModel;
 import com.deliverit.cpagar.model.DadosPagamentoModel;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/contas-pagar")
@@ -21,8 +23,8 @@ public class ContasPagarController {
         return contasPagarFacade.inserirPagamento(contasPagarModel);
     }
 
-    @GetMapping("inserir")
-    public String create() {
-        return "oi";
+    @GetMapping("pagamentos")
+    public List<DadosPagamentoModel> obterPagamento() {
+        return contasPagarFacade.obterPagamento();
     }
 }

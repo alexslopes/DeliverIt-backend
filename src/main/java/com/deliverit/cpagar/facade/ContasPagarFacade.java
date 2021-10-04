@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -34,6 +35,10 @@ public class ContasPagarFacade {
 
         return dadosPagamentoService.save(dadosPagamentoModel);
 
+    }
+
+    public List<DadosPagamentoModel> obterPagamento() {
+        return dadosPagamentoService.findAll();
     }
 
     public int verificarDiasAtraso(Date dataVencimento, Date dataPagamento) {
