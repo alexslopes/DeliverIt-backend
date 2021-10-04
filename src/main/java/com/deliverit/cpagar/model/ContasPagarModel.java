@@ -24,7 +24,7 @@ public class ContasPagarModel {
     private int id;
 
     @NonNull
-    private BigDecimal valorOriginal;
+    private double valorOriginal;
 
     @NonNull
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

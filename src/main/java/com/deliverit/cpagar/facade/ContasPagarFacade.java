@@ -6,6 +6,7 @@ import com.deliverit.cpagar.model.MultaJurosModel;
 import com.deliverit.cpagar.service.DadosPagamentoService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -21,14 +22,17 @@ public class ContasPagarFacade {
     public void inserirPagamento(ContasPagarModel contasPagarModel) {
         int diferencaDias = verificarDiasAtraso(contasPagarModel.getDataVencimento() ,contasPagarModel.getDataPagamento());
         MultaJurosModel multaJurosModel = valorMultaJuros(diferencaDias);
-
-        dadosPagamentoService.save(DadosPagamentoModel.builder()
+        DadosPagamentoModel dadosPagamentoModel = DadosPagamentoModel.builder()
                 .valorOriginal(contasPagarModel.getValorOriginal())
                 .dataVencimento(contasPagarModel.getDataVencimento())
                 .dataPagamento(contasPagarModel.getDataPagamento())
                 .diasEmAtraso(diferencaDias < 0 ? 0 : diferencaDias)
                 .multa(multaJurosModel.getMulta())
-                .juros(multaJurosModel.getJuros()).build());
+                .juros(multaJurosModel.getJuros()).build();
+
+        calcularValorCorrigido(dadosPagamentoModel);
+
+        dadosPagamentoService.save(dadosPagamentoModel);
 
     }
 
@@ -52,5 +56,16 @@ public class ContasPagarFacade {
         }
 
         return MultaJurosModel.builder().multa(0).juros(0).build();
+    }
+
+    public void calcularValorCorrigido(DadosPagamentoModel dadosPagamentoModel) {
+        double valorOriginal = dadosPagamentoModel.getValorOriginal();
+        double multa = dadosPagamentoModel.getMulta();
+        double juros = dadosPagamentoModel.getJuros();
+        int diasAtrasado = dadosPagamentoModel.getDiasEmAtraso();
+
+        double valorCorrigido =  valorOriginal + (valorOriginal*multa) + diasAtrasado*(valorOriginal*juros);
+
+        dadosPagamentoModel.setValorCorrigido(valorCorrigido);
     }
 }

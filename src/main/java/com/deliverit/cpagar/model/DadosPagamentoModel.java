@@ -25,7 +25,10 @@ public class DadosPagamentoModel {
     private int id;
 
     @NonNull
-    private BigDecimal valorOriginal;
+    private double valorOriginal;
+
+    @NonNull
+    private double valorCorrigido;
 
     @NonNull
     @JsonFormat(pattern="yyyy-MM-dd")
