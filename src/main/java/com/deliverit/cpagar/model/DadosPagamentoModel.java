@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -21,29 +19,29 @@ import java.util.Date;
 public class DadosPagamentoModel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "increment")
     private int id;
 
-    @NonNull
+    @Column(name = "valor_original")
     private double valorOriginal;
 
-    @NonNull
+    @Column(name = "valor_corrigido")
     private double valorCorrigido;
 
-    @NonNull
+    @Column(name = "data_vencimento")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date dataVencimento;
 
-    @NonNull
+    @Column(name = "data_pagamento")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date dataPagamento;
 
-    @NonNull
+    @Column(name = "dias_em_atraso")
     private int diasEmAtraso;
 
-    @NonNull
+    @Column(name = "multa")
     private double multa;
 
-    @NonNull
+    @Column(name = "juros")
     private double juros;
 }
